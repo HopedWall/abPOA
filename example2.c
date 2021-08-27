@@ -97,20 +97,21 @@ int main(void) {
     // --- ADD SECOND SEQUENCE ---
     // TODO: use abpoa_add_subgraph_alignment, same as add_graph_alignment but requires ids
 
-    char seq2[100] = "ATGCTTTTT"; 
+    char seq2[100] = "ATGCTTTTT";
     int seq_len2 = strlen(seq2);
     uint8_t *bseq2 = (uint8_t*)malloc(sizeof(uint8_t) * seq_len2); 
     for (i=0; i <seq_len2; i++) {
         bseq2[i] = _char26_table[(int)seq2[i]];
+        printf("%c", bseq2[i]);
     }
 
     abpoa_res_t res2;
     abpoa_add_graph_alignment(ab, abpt, bseq2, seq_len2, NULL, res2, 1, 2, 1);
     //abpoa_add_subgraph_alignment(ab, abpt, seq_len, seq_len+seq_len2, bseq2, seq_len2, NULL, res2, 1, 2, 1);
 
-    abpoa_generate_gfa(ab, abpt, stdout);
+    //abpoa_generate_gfa(ab, abpt, stdout);
     
-    free(bseq); //free(bseq2);
+    free(bseq); free(bseq2);
     abpoa_free(ab); abpoa_free_para(abpt); 
     return 0;
 }
